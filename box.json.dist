@@ -1,0 +1,33 @@
+{
+  "banner":"MagePatch - Fabio Ros (GDPRProof)",
+  "alias":"magepatch.phar",
+  "chmod": "0755",
+  "compression": "GZ",
+  "compactors": [
+    "Herrera\\Box\\Compactor\\Php",
+    "Herrera\\Box\\Compactor\\Json"
+  ],
+  "directories": [
+    "src"
+  ],
+  "files": [
+    "LICENSE",
+    "res/patches.json"
+  ],
+  "finder": [
+    {
+      "name": "*.php",
+      "exclude": [
+        "tests",
+        "test",
+        "Test",
+        "Tests"
+      ],
+      "in": "vendor"
+    }
+  ],
+  "intercept": true,
+  "main": "bin/console",
+  "output": "magepatch.phar",
+  "stub": true
+}

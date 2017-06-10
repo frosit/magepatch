@@ -1,0 +1,51 @@
+{
+  "name": "gdprproof/magento-patch-finder",
+  "description": "helps to find Magento patches and verify them",
+  "type": "project",
+  "homepage": "https://github.com/gdprproof/magento-patch-finder",
+  "keywords": [
+    "magento",
+    "Patch",
+    "patches",
+    "console",
+    "SUPEE",
+    "finder"
+  ],
+  "license": "MIT",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "homepage": "https://www.gdprproof.com",
+      "name": "Fabio Ros",
+      "email": "fabio@frosit.nl",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "symfony/console": "^3.2",
+    "version/version": "^2.1",
+    "guzzlehttp/guzzle": "6.2.*"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.0.*",
+    "phpunit/phpunit": "4.5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "GDPRProof\\": "src/",
+      "Frosit\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "bin": [
+    "bin/console"
+  ]
+}

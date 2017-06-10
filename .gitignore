@@ -1,0 +1,20 @@
+### Magento Patches finder
+
+## IDE & OS
+.DS_*
+/.idea
+
+## App
+/vendor
+
+## Build
+/box.json
+/*.pubkey
+/phar-private*
+/*.phar
+
+## Tests
+/.magedir
+/public
+
+## Dev
