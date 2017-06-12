@@ -20,11 +20,13 @@ namespace GDPRProof\Commands\Patches;
 
 use GDPRProof\Commands\AbstractCommand;
 use GDPRProof\Util\Patch\Diff;
+use SplFileInfo;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\SplFileInfo;
+
+ini_set('display_errors', 1);
 
 /**
  * Class ShowAppliedCommand
@@ -54,6 +56,7 @@ class ExtractDiffCommand extends AbstractCommand
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @throws \InvalidArgumentException
      */
     public function initialize(InputInterface $input, OutputInterface $output)
     {
@@ -81,57 +84,58 @@ class ExtractDiffCommand extends AbstractCommand
                 exit(0);
             }
 
-
-            $files = new \DirectoryIterator($path);
-            $patchFiles = [];
-
-            /** @var SplFileInfo $file */
-            foreach ($files as $file) {
-                if ($file->isFile() && substr($file->getFilename(), -3) === '.sh') {
-                    $name = $file->getFilename();
-
-                    if (file_exists(str_replace('.sh', '.diff', $file->getRealPath()))) {
-                        continue;
-                    }
-
-                    $patchFiles[] = $name;
-                }
-            }
-
-
-            if (count($patchFiles) <= 0) {
-                $this->fio->writeln(
-                    'Could not find any '.count(
-                        $patchFiles
-                    ).' patch files to extract from or that wasn\'t already extracted.'
-                );
-                exit(1);
-            }
-
-            $this->fio->writeln('Found '.count($patchFiles).' patch files that are not extracted.');
-
-            if (!$input->getOption('recursive')) {
-                if ($file = $this->fio->choice('Which file do you want to extract a diff from?', $patchFiles)) {
-                    $toProcess[] = $file;
-                } else {
-                    exit(0);
-                }
-            } else {
-                $toProcess = $patchFiles;
-            }
-
-
-            $diffFiles = [];
-            foreach ($toProcess as $patchFile) {
-                $diffFiles[] = $diffFile = Diff::extractDiff($patchFile, $path);
-                $this->fio->writeUpdate('Converted Diff: ', $diffFile);
-            }
-
-            if (count($diffFiles > 1)) {
-                $this->fio->section('Currently extracted:');
-                $this->fio->listing($diffFiles);
-            }
-
         }
+        $files = new \DirectoryIterator($path);
+        $patchFiles = [];
+
+        /** @var SplFileInfo $file */
+        foreach ($files as $file) {
+            if ($file->isFile() && substr($file->getFilename(), -3) === '.sh') {
+                $name = $file->getFilename();
+
+                // Check for an already existing diff in that location
+                if (file_exists(str_replace('.sh', '.diff', $file->getRealPath()))) {
+                    continue;
+                }
+
+                $patchFiles[] = $name;
+            }
+        }
+
+
+        if (count($patchFiles) <= 0) {
+            $this->fio->writeln(
+                'Could not find any '.count(
+                    $patchFiles
+                ).' patch files to extract from or that were not already extracted.'
+            );
+            exit(1);
+        }
+
+        $this->fio->writeln('Found '.count($patchFiles).' patch files that are not extracted.');
+
+        if (!$input->getOption('recursive')) {
+            if ($file = $this->fio->choice('Which file do you want to extract a diff from?', $patchFiles)) {
+                $toProcess[] = $file;
+            } else {
+                exit(0);
+            }
+        } else {
+            $toProcess = $patchFiles;
+        }
+
+
+        $diffFiles = [];
+        foreach ($toProcess as $patchFile) {
+            $diffFiles[] = $diffFile = Diff::extractDiff($patchFile, $path);
+            $this->fio->writeUpdate('Converted Diff: ', $diffFile);
+        }
+
+        if (count($diffFiles) > 1) {
+            $this->fio->section('Currently extracted:');
+            $this->fio->listing($diffFiles);
+        }
+
     }
+
 }

@@ -1,6 +1,7 @@
 {
-  "build": 1495747092,
+  "build": 1497284896,
   "source": "https:\/\/magepatch.gdprproof.com\/patches.json",
+  "patches_source":"https:\/\/github.com\/gdprproof\/magento-patches",
   "patches": [
     {
       "patchId": "SUPEE-1868_CE_1.4.2.0_v1",
@@ -3887,6 +3888,17 @@
       "checksum_patch": "5d7af332030ecea3fb62b2c1389d6e8ff931b3a4"
     },
     {
+      "patchId": "SUPEE-6482_CE_1.9.2.0_v1-2015-08-03-06-51-10",
+      "supee": "6482",
+      "edition": "CE",
+      "versionFrom": "1.9.2.0",
+      "versionTo": "1.9.2.0",
+      "revision": "v1",
+      "releaseDate": "2015-08-03-06-51-10",
+      "checksum": "0a13afec4f4b58969d39f51497610228ed0db1c6",
+      "location": "CE1.9\/PATCH_SUPEE-6482_CE_1.9.2.0_v1-2015-08-03-06-51-10.sh"
+    },
+    {
       "patchId": "SUPEE-6788_EE_1.9.0.0_v2-2015-11-30-06-18-00",
       "supee": "6788",
       "edition": "EE",
@@ -4089,6 +4101,308 @@
       "checksum": "5cffa78d9958d7d0a85e485bea5aad9fef6fc8e2",
       "location": "EE1.11\/PATCH_SUPEE-3941_EE_1.11.1.0-1.11.0.0_CE_1.6.1.0-1.6.0.0_v1-2016-10-14-08-56-18.sh",
       "comment": "no revision"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.5.0.1_v1-2017-05-25-09-38-26",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.5.0.1",
+      "versionTo": "1.5.0.1",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-38-26",
+      "checksum": "f49020bee1b46d2792ce7d90ea018d49b6844d2f",
+      "location": "CE1.5\/PATCH_SUPEE-9767_CE_1.5.0.1_v1-2017-05-25-09-38-26.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.5.1.0_v1-2017-05-25-09-37-02",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.5.1.0",
+      "versionTo": "1.5.1.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-37-02",
+      "checksum": "6c8d949d7598e7add062076d28c830631f9d7ef4",
+      "location": "CE1.5\/PATCH_SUPEE-9767_CE_1.5.1.0_v1-2017-05-25-09-37-02.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.6.0.0_v1-2017-05-25-09-33-48",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.6.0.0",
+      "versionTo": "1.6.0.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-33-48",
+      "checksum": "a86b8978faeff9b81278bd33fc63baa68ae868a2",
+      "location": "CE1.6\/PATCH_SUPEE-9767_CE_1.6.0.0_v1-2017-05-25-09-33-48.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.6.2.0_v1-2017-05-25-09-32-57",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.6.1.0",
+      "versionTo": "1.6.2.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-32-57",
+      "checksum": "76f1c16a3e451e6f46895b8f61080acc86f7ec2f",
+      "location": "CE1.6\/PATCH_SUPEE-9767_CE_1.6.2.0_v1-2017-05-25-09-32-57.sh",
+      "comment" : "Starts at 1.6.1.0 to 1.6.2.0 despite man"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.7.0.2_v1-2017-05-25-09-31-32",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.7.0.0",
+      "versionTo": "1.7.0.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-31-32",
+      "checksum": "0a6b342e5bf15e904b5dfcf76b6f5d56b9337e68",
+      "location": "CE1.7\/PATCH_SUPEE-9767_CE_1.7.0.2_v1-2017-05-25-09-31-32.sh",
+      "comment" : "starts at 1.7.0.0 to 1.7.0.2 despite name"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.8.0.0_v1-2017-05-25-09-29-23",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.8.0.0",
+      "versionTo": "1.8.0.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-29-23",
+      "checksum": "8a36f738948b0b1284464f6fffc6be9192b5a5f6",
+      "location": "CE1.8\/PATCH_SUPEE-9767_CE_1.8.0.0_v1-2017-05-25-09-29-23.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.8.1.0_v1-2017-05-25-09-16-32",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.8.1.0",
+      "versionTo": "1.8.1.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-16-32",
+      "checksum": "ba756c8b8943cb26d7d7c3834c2d8a7c0636d38e",
+      "location": "CE1.8\/PATCH_SUPEE-9767_CE_1.8.1.0_v1-2017-05-25-09-16-32.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.9.0.1_v1-2017-05-25-09-15-34",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.9.0.0",
+      "versionTo": "1.9.0.1",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-15-34",
+      "checksum": "c300b3ecc6d25f005a0e5abda03033f322c4a852",
+      "location": "CE1.9\/PATCH_SUPEE-9767_CE_1.9.0.1_v1-2017-05-25-09-15-34.sh",
+      "comment" :"Starting at 1.9.0.0 to 1.9.0.1 despite name"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.9.1.0_v1-2017-05-25-09-11-02",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.9.1.0",
+      "versionTo": "1.9.1.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-11-02",
+      "checksum": "b2b251cb2ce832ff1baae5ac4a3e2b14079937bb",
+      "location": "CE1.9\/PATCH_SUPEE-9767_CE_1.9.1.0_v1-2017-05-25-09-11-02.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.9.3.0_v1-2017-05-25-09-09-56",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.9.1.1",
+      "versionTo": "1.9.3.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-09-56",
+      "checksum": "d65d1682f036e1071070f932344c2fe90d18690d",
+      "location": "CE1.9\/PATCH_SUPEE-9767_CE_1.9.3.0_v1-2017-05-25-09-09-56.sh",
+      "comment": "Starting version 1.9.1.1 to 1.9.3.0 despite name"
+    },
+    {
+      "patchId": "SUPEE-9767_CE_1.9.3.2_v1-2017-05-25-09-03-28",
+      "supee": "9767",
+      "edition": "CE",
+      "versionFrom": "1.9.3.1",
+      "versionTo": "1.9.3.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-25-09-03-28",
+      "checksum": "61da0dd08f930130d8a95638110fc1689ef75fd0",
+      "location": "CE1.9\/PATCH_SUPEE-9767_CE_1.9.3.2_v1-2017-05-25-09-03-28.sh",
+      "comment": "Starts at version 1.9.3.1 to 1.9.3.2 despite name"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.10.0.2_v1-2017-05-22-10-44-00",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.10.0.2",
+      "versionTo": "1.10.0.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-44-00",
+      "checksum": "3ef5a3a02217809171c009242631ed4ec4408d48",
+      "location": "EE1.10\/PATCH_SUPEE-9767_EE_1.10.0.2_v1-2017-05-22-10-44-00.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.10.1.1_v1-2017-05-22-10-39-52",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.10.1.1",
+      "versionTo": "1.10.1.1",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-39-52",
+      "checksum": "f3ae7e13b3f7ab0b7358654f9a643fd3d328e858",
+      "location": "EE1.10\/PATCH_SUPEE-9767_EE_1.10.1.1_v1-2017-05-22-10-39-52.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.11.0.2_v1-2017-05-22-10-18-02",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.11.0.2",
+      "versionTo": "1.11.0.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-18-02",
+      "checksum": "154f94ed5ae5b88b16e46258b097417fe7e5526c",
+      "location": "EE1.11\/PATCH_SUPEE-9767_EE_1.11.0.2_v1-2017-05-22-10-18-02.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.11.2.0_v1-2017-05-22-10-14-30",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.11.2.0",
+      "versionTo": "1.11.2.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-14-30",
+      "checksum": "41dd58bc71f803a7df0fdd17b917127d27e63a3d",
+      "location": "EE1.11\/PATCH_SUPEE-9767_EE_1.11.2.0_v1-2017-05-22-10-14-30.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.12.0.2_v1-2017-05-22-10-10-50",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.12.0.2",
+      "versionTo": "1.12.0.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-10-50",
+      "checksum": "2591386d713780a2ce823f864415e8bfdf033ec3",
+      "location": "EE1.12\/PATCH_SUPEE-9767_EE_1.12.0.2_v1-2017-05-22-10-10-50.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.13.0.1_v1-2017-05-22-10-04-45",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.13.0.1",
+      "versionTo": "1.13.0.1",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-04-45",
+      "checksum": "7705d15e2eff86fe26653b32396b048e021889e4",
+      "location": "EE1.13\/PATCH_SUPEE-9767_EE_1.13.0.1_v1-2017-05-22-10-04-45.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.13.0.2_v1-2017-05-22-09-59-11",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.13.0.2",
+      "versionTo": "1.13.0.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-09-59-11",
+      "checksum": "1a80fa926c82bb3bb13ea0f2ef4d33f6a1accbb8",
+      "location": "EE1.13\/PATCH_SUPEE-9767_EE_1.13.0.2_v1-2017-05-22-09-59-11.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.13.1.0_v1-2017-05-22-09-47-23",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.13.1.0",
+      "versionTo": "1.13.1.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-09-47-23",
+      "checksum": "cb21e11355d8d6eebc556938c69ae46fecd87fae",
+      "location": "EE1.13\/PATCH_SUPEE-9767_EE_1.13.1.0_v1-2017-05-22-09-47-23.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.14.0.1_v1-2017-05-22-09-20-02",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.14.0.1",
+      "versionTo": "1.14.0.1",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-09-20-02",
+      "checksum": "e57bb5ff16c5dbbc72804de976bc1d30a6605c3c",
+      "location": "EE1.14\/PATCH_SUPEE-9767_EE_1.14.0.1_v1-2017-05-22-09-20-02.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.14.1.0_v1-2017-05-22-09-12-12",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.14.1.0",
+      "versionTo": "1.14.1.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-09-12-12",
+      "checksum": "b0aa5bca57173ebe59bf1f1fb2ee08701e1f1070",
+      "location": "EE1.14\/PATCH_SUPEE-9767_EE_1.14.1.0_v1-2017-05-22-09-12-12.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.14.2.2_v1-2017-05-22-09-08-55",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.14.2.2",
+      "versionTo": "1.14.2.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-09-08-55",
+      "checksum": "ef97250c8f2e0cd8879639e3cfa5bec38c14fce9",
+      "location": "EE1.14\/PATCH_SUPEE-9767_EE_1.14.2.2_v1-2017-05-22-09-08-55.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.14.2.4_v1-2017-05-22-07-53-07",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.14.2.4",
+      "versionTo": "1.14.2.4",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-07-53-07",
+      "checksum": "2e2ac587a880f6236f445bb8a55abdd513a264f2",
+      "location": "EE1.14\/PATCH_SUPEE-9767_EE_1.14.2.4_v1-2017-05-22-07-53-07.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.14.3.0_v1-2017-05-22-07-50-58",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.14.3.0",
+      "versionTo": "1.14.3.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-07-50-58",
+      "checksum": "be1bb2515826a961ef3e8d11174cb9fbd5f921f7",
+      "location": "EE1.14\/PATCH_SUPEE-9767_EE_1.14.3.0_v1-2017-05-22-07-50-58.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.14.3.2_v1-2017-05-22-07-20-39",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.14.3.2",
+      "versionTo": "1.14.3.2",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-07-20-39",
+      "checksum": "f1e5b3975cb451ba66c273545175d027d6bf23d7",
+      "location": "EE1.14\/PATCH_SUPEE-9767_EE_1.14.3.2_v1-2017-05-22-07-20-39.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.9.0.0_v1-2017-05-22-10-50-10",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.9.0.0",
+      "versionTo": "1.9.0.0",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-50-10",
+      "checksum": "d44e4a668a20d34771b3571611d3cce06a256257",
+      "location": "EE1.9\/PATCH_SUPEE-9767_EE_1.9.0.0_v1-2017-05-22-10-50-10.sh"
+    },
+    {
+      "patchId": "SUPEE-9767_EE_1.9.1.1_v1-2017-05-22-10-47-35",
+      "supee": "9767",
+      "edition": "EE",
+      "versionFrom": "1.9.1.1",
+      "versionTo": "1.9.1.1",
+      "revision": "v1",
+      "releaseDate": "2017-05-22-10-47-35",
+      "checksum": "5b9a4edd86eaba2126da7aa7ee3ed1b1a14512a2",
+      "location": "EE1.9\/PATCH_SUPEE-9767_EE_1.9.1.1_v1-2017-05-22-10-47-35.sh"
     }
   ]
 }

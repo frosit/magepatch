@@ -22,13 +22,10 @@ use GDPRProof\Application;
 use GDPRProof\Util\FrositIoHelper;
 use GDPRProof\Util\Mage;
 use GDPRProof\Util\Patches;
-use SplFileInfo;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\Iterator\FileTypeFilterIterator;
 
 /**
  * Class AbstractCommand
@@ -139,10 +136,11 @@ abstract class AbstractCommand extends Command
     /**
      * Gets Mage proxy
      * @return Mage
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     public function getMage()
     {
-        if (!$this->mage->hasLoaded()) {
+        if (!$this->mage->hasLoaded() && !$this->input->getOption('nomage')) {
             $this->mage->find();
         }
 

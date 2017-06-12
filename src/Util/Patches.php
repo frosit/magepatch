@@ -51,6 +51,12 @@ class Patches
     protected $patches;
 
     /**
+     * Take the patches source from the patches.json index file in case our mirror falls behind
+     * @var string $patchesSource
+     */
+    protected $patchesSource;
+
+    /**
      * Last indexation of patches
      * @var DateTime $indexTime
      */
@@ -146,7 +152,9 @@ class Patches
      * @todo add update from web
      * @todo add phar mode
      * @todo directory mess
-     * @throws ParseException
+     * @todo implement downloading from different sources according to json file
+     * @param $patchesFile
+     * @return bool
      */
     private function initialize($patchesFile)
     {
@@ -157,6 +165,10 @@ class Patches
                         $this->patches = $patchesFile['patches'];
                     } else {
                         return false;
+                    }
+
+                    if (isset($patchesFile['patches_source'])) {
+                        $this->patchesSource = $patchesFile['patches_source'];
                     }
 
                     if (isset($patchesFile['build'])) {
@@ -173,6 +185,5 @@ class Patches
 
         return false;
     }
-
 
 }
