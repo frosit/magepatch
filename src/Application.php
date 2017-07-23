@@ -1,19 +1,19 @@
 <?php
 /**
- *     Magepatch - Magento Patches finder & verification utility
+ * Magepatch - Magento Patches finder & verification utility
  *
- *     @Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
- *     @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
+ * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 namespace GDPRProof;
@@ -37,22 +37,19 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class Application
- * @package Frosit
+ * Class Application.
  */
 class Application extends BaseApplication
 {
-
     /**
-     * Frosit
+     * Frosit.
      */
     const APP_NAME = '<comment>Magento Patchfinder</comment>';
 
     /**
-     * App Version
+     * App Version.
      */
     const APP_VERSION = '0.1.0';
-
 
     /**
      * @var string
@@ -74,7 +71,7 @@ class Application extends BaseApplication
     private $autoloader;
 
     /**
-     * @var FrositIoHelper $fio
+     * @var FrositIoHelper
      */
     public $fio;
 
@@ -84,26 +81,29 @@ class Application extends BaseApplication
     public $isPhar;
 
     /**
-     * Custom Magento wrapper class
-     * @var Mage $mage
+     * Custom Magento wrapper class.
+     *
+     * @var Mage
      */
     public $mage;
 
     /**
-     * @var array $patches
+     * @var array
      */
     public $patches;
 
     /**
      * Application constructor.
+     *
      * @param null $autoloader
+     *
      * @throws \Symfony\Component\Console\Exception\LogicException
      */
     public function __construct($autoloader = null)
     {
         $this->autoloader = $autoloader;
 
-        $this->setHelperSet(new HelperSet(array()));
+        $this->setHelperSet(new HelperSet([]));
 
         $this->add(new InfoCommand());
         $this->add(new ShowAppliedCommand());
@@ -115,6 +115,7 @@ class Application extends BaseApplication
 
     /**
      * @param null $magePath
+     *
      * @return Mage
      */
     public function getMage($magePath = null)
@@ -132,13 +133,14 @@ class Application extends BaseApplication
     /**
      * Gets the default input definition.
      *
-     * @return InputDefinition An InputDefinition instance
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @return InputDefinition An InputDefinition instance
      */
     protected function getDefaultInputDefinition()
     {
         return new InputDefinition(
-            array(
+            [
                 new InputArgument('command', InputArgument::REQUIRED, 'The command to execute'),
 
                 new InputOption('--help', '-h', InputOption::VALUE_NONE, 'Display this help message'),
@@ -148,14 +150,17 @@ class Application extends BaseApplication
                     InputOption::VALUE_NONE,
                     'Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug'
                 ),
-            )
+            ]
         );
     }
 
     /**
-     * Checks wether it is in phar mode and optionally, returns the path
+     * Checks wether it is in phar mode and optionally, returns the path.
+     *
      * @todo finish path things
+     *
      * @return bool
+     *
      * @internal param bool $returnPath
      */
     public function isPhar()
@@ -167,16 +172,16 @@ class Application extends BaseApplication
         return $this->isPhar;
     }
 
-
-
     /**
-     * Returns the root directory
+     * Returns the root directory.
+     *
      * @param int $levelsMin (amount of levels lower than root)
+     *
      * @return string
      */
     public function getRootDir($levelsMin = 0)
     {
-        $levelsMin++; // Always go one directory lower since root is there
+        ++$levelsMin; // Always go one directory lower since root is there
         if ($path = Phar::running()) {
             return $path;
         }
@@ -199,6 +204,7 @@ class Application extends BaseApplication
 
     /**
      * @param null $output
+     *
      * @return FrositIoHelper
      */
     public function getFio($output = null)
@@ -247,11 +253,12 @@ class Application extends BaseApplication
     }
 
     /**
-     * @param InputInterface $input [optional]
+     * @param InputInterface  $input  [optional]
      * @param OutputInterface $output [optional]
      *
-     * @return int
      * @throws \Exception
+     *
+     * @return int
      */
     public function run(InputInterface $input = null, OutputInterface $output = null)
     {
@@ -279,11 +286,13 @@ class Application extends BaseApplication
 
     /**
      * @param ClassLoader $loader
-     * @return Application
+     *
      * @throws \Symfony\Component\Console\Exception\LogicException
+     *
+     * @return Application
      */
     public static function createApplication(ClassLoader $loader)
     {
-        return new Application($loader);
+        return new self($loader);
     }
 }

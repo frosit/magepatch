@@ -1,38 +1,33 @@
 <?php
 /**
- *     Magepatch - Magento Patches finder & verification utility
+ * Magepatch - Magento Patches finder & verification utility
  *
- *     @Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
- *     @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
+ * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 namespace GDPRProof\Commands\Patches;
 
 use GDPRProof\Commands\AbstractCommand;
-
-
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class FindCommand
- *
- * @package GDPRProof\Commands\Patches
+ * Class FindCommand.
  */
 class FindCommand extends AbstractCommand
 {
-
     protected $version;
     protected $edition;
     protected $baseDir;
@@ -64,8 +59,9 @@ EOF
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @throws \InvalidArgumentException
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
@@ -82,10 +78,12 @@ EOF
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
-     * @return int|null|void
+     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      * @throws \Exception
      * @throws \GDPRProof\Util\Patch\ParseException
+     *
+     * @return int|null|void
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -127,12 +125,13 @@ EOF
         }
     }
 
-
     /**
-     * Shows patch status table
+     * Shows patch status table.
+     *
      * @param $patches
      */
-    protected function showStatusTable(array $patches) {
+    protected function showStatusTable(array $patches)
+    {
         $tablePatches = [];
         $allowedKeys = ['uid', 'supee', 'revision', 'checksum', 'applied'];
         foreach ($patches as $patch) {
@@ -148,9 +147,11 @@ EOF
     }
 
     /**
-     * Get Magento info
-     * @return bool
+     * Get Magento info.
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return bool
      */
     protected function getMageInfo()
     {

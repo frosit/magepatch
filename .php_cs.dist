@@ -3,7 +3,7 @@
 $fileHeaderComment = <<<COMMENT
 Magepatch - Magento Patches finder & verification utility
 
-@Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
+@Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
 @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
 
 This program is free software: you can redistribute it and/or modify

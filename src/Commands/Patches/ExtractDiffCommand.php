@@ -1,19 +1,19 @@
 <?php
 /**
- *     Magepatch - Magento Patches finder & verification utility
+ * Magepatch - Magento Patches finder & verification utility
  *
- *     @Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
- *     @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
+ * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 namespace GDPRProof\Commands\Patches;
@@ -29,16 +29,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 ini_set('display_errors', 1);
 
 /**
- * Class ShowAppliedCommand
- * @package GDPRProof\Commands\Patches
+ * Class ShowAppliedCommand.
  */
 class ExtractDiffCommand extends AbstractCommand
 {
     /**
-     * @var string $baseDir
+     * @var string
      */
     protected $baseDir;
-
 
     protected function configure()
     {
@@ -54,8 +52,9 @@ class ExtractDiffCommand extends AbstractCommand
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @throws \InvalidArgumentException
      */
     public function initialize(InputInterface $input, OutputInterface $output)
@@ -64,10 +63,12 @@ class ExtractDiffCommand extends AbstractCommand
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
-     * @return int|null|void
+     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @return int|null|void
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -76,21 +77,19 @@ class ExtractDiffCommand extends AbstractCommand
         if (!$input->getArgument('path')) {
             $path = $this->getMage()->getRootDir().DIRECTORY_SEPARATOR.'var'.DIRECTORY_SEPARATOR.'patches';
         } else {
-
             // @todo what is this
             $path = $input->getArgument('path');
             if (!file_exists($path) || !is_readable($path)) {
                 $this->fio->error('No path specified, add a custom path or specify magento\'s location');
                 exit(0);
             }
-
         }
         $files = new \DirectoryIterator($path);
         $patchFiles = [];
 
         /** @var SplFileInfo $file */
         foreach ($files as $file) {
-            if ($file->isFile() && substr($file->getFilename(), -3) === '.sh') {
+            if ($file->isFile() && mb_substr($file->getFilename(), -3) === '.sh') {
                 $name = $file->getFilename();
 
                 // Check for an already existing diff in that location
@@ -101,7 +100,6 @@ class ExtractDiffCommand extends AbstractCommand
                 $patchFiles[] = $name;
             }
         }
-
 
         if (count($patchFiles) <= 0) {
             $this->fio->writeln(
@@ -124,7 +122,6 @@ class ExtractDiffCommand extends AbstractCommand
             $toProcess = $patchFiles;
         }
 
-
         $diffFiles = [];
         foreach ($toProcess as $patchFile) {
             $diffFiles[] = $diffFile = Diff::extractDiff($patchFile, $path);
@@ -135,7 +132,5 @@ class ExtractDiffCommand extends AbstractCommand
             $this->fio->section('Currently extracted:');
             $this->fio->listing($diffFiles);
         }
-
     }
-
 }

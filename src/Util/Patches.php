@@ -1,24 +1,22 @@
 <?php
 /**
- *     Magepatch - Magento Patches finder & verification utility
+ * Magepatch - Magento Patches finder & verification utility
  *
- *     @Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
- *     @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
+ * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
-
 namespace GDPRProof\Util;
-
 
 use DateTime;
 use GDPRProof\Util\Patch\Downloader;
@@ -27,37 +25,39 @@ use GDPRProof\Util\Patch\ParseException;
 use Version\Version;
 
 /**
- * Class Patches
- * @package GDPRProof\Util
+ * Class Patches.
  */
 class Patches
 {
-
-    /**
+    /*
      * Patch filters
      */
     use Filter;
 
     /**
-     * The index collection of patches
-     * @var array $patches
+     * The index collection of patches.
+     *
+     * @var array
      */
     protected $patches;
 
     /**
-     * Take the patches source from the patches.json index file in case our mirror falls behind
-     * @var string $patchesSource
+     * Take the patches source from the patches.json index file in case our mirror falls behind.
+     *
+     * @var string
      */
     protected $patchesSource;
 
     /**
-     * Last indexation of patches
-     * @var DateTime $indexTime
+     * Last indexation of patches.
+     *
+     * @var DateTime
      */
     protected $indexTime;
 
     /**
      * Patches constructor.
+     *
      * @param $patchFile
      */
     public function __construct($patchFile)
@@ -78,10 +78,11 @@ class Patches
     }
 
     /**
-     * Filter patches collection by Magento installation
+     * Filter patches collection by Magento installation.
      *
      * @param Mage $mage
      * @param bool $filterByApplied
+     *
      * @return array|bool
      */
     public function getPatchesForMage(Mage $mage, $filterByApplied = true)
@@ -116,7 +117,6 @@ class Patches
 
     public function downloadPatches($patches, $basedir)
     {
-
         $storageDir = $basedir.DIRECTORY_SEPARATOR.'var'.DIRECTORY_SEPARATOR.'patches';
 
         if (!@mkdir($storageDir, 0755, true) && !is_dir($storageDir)) {
@@ -144,12 +144,15 @@ class Patches
     }
 
     /**
-     * Initialises patches data
+     * Initialises patches data.
+     *
      * @todo add update from web
      * @todo add phar mode
      * @todo directory mess
      * @todo implement downloading from different sources according to json file
+     *
      * @param $patchesFile
+     *
      * @return bool
      */
     private function initialize($patchesFile)
@@ -181,5 +184,4 @@ class Patches
 
         return false;
     }
-
 }

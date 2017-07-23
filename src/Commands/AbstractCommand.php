@@ -1,19 +1,19 @@
 <?php
 /**
- *     Magepatch - Magento Patches finder & verification utility
+ * Magepatch - Magento Patches finder & verification utility
  *
- *     @Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
- *     @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
+ * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 namespace GDPRProof\Commands;
@@ -28,27 +28,25 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class AbstractCommand
- * @package GDPRProof\Commands
+ * Class AbstractCommand.
  */
 abstract class AbstractCommand extends Command
 {
-
     /**
-     * @var InputInterface $input
+     * @var InputInterface
      */
     public $input;
 
     /**
-     * @var OutputInterface $output
+     * @var OutputInterface
      */
     public $output;
 
-    /** @var  FrositIoHelper */
+    /** @var FrositIoHelper */
     public $fio;
 
     /**
-     * @var Mage $mage
+     * @var Mage
      */
     public $mage;
 
@@ -64,6 +62,7 @@ abstract class AbstractCommand extends Command
 
     /**
      * AbstractCommand constructor.
+     *
      * @throws \Symfony\Component\Console\Exception\LogicException
      */
     public function __construct()
@@ -73,8 +72,9 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @throws \InvalidArgumentException
      */
     public function initialize(InputInterface $input, OutputInterface $output)
@@ -113,12 +113,12 @@ abstract class AbstractCommand extends Command
      */
     protected function getFrositIOHelper()
     {
-        /** @var FrositIoHelper */
+        /* @var FrositIoHelper */
         return new FrositIoHelper($this->input, $this->output);
     }
 
     /**
-     * Get patches collection
+     * Get patches collection.
      *
      * @return Patches
      */
@@ -134,9 +134,11 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * Gets Mage proxy
-     * @return Mage
+     * Gets Mage proxy.
+     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @return Mage
      */
     public function getMage()
     {
@@ -148,7 +150,7 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * Sets generic command options
+     * Sets generic command options.
      */
     public function setGenericOptions()
     {
@@ -157,7 +159,6 @@ abstract class AbstractCommand extends Command
         $this->addOption('edition', null, InputOption::VALUE_OPTIONAL, 'Override edition (ee or ce)');
         $this->addOption('version', null, InputOption::VALUE_OPTIONAL, 'Override version (1.7.0.1)');
     }
-
 
     /**
      * @return Application|\Symfony\Component\Console\Application

@@ -1,19 +1,19 @@
 <?php
 /**
- *     Magepatch - Magento Patches finder & verification utility
+ * Magepatch - Magento Patches finder & verification utility
  *
- *     @Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
- *     @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
+ * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 namespace GDPRProof\Util\Mage;
@@ -25,29 +25,29 @@ use RecursiveIteratorIterator;
 use SplFileInfo;
 
 /**
- * Class Mage
+ * Class Mage.
  *
  * A conceptual Mage finder class.
  *
  * @deprecated
- * @package GDPRProof\Util
  */
 class Finder
 {
-
     const DOCROOT = 1;
     const MAGEROOT = 2;
     const MAXTRAVERSALS = 4;
 
     /**
-     * Current users' location in system
-     * @var string $userLocation
+     * Current users' location in system.
+     *
+     * @var string
      */
     private $userLocation;
 
     /**
-     * Flag whether Magento is initialized yet
-     * @var bool $initialized
+     * Flag whether Magento is initialized yet.
+     *
+     * @var bool
      */
     private $initialized = false;
 
@@ -64,6 +64,7 @@ class Finder
 
     /**
      * Mage constructor.
+     *
      * @param $userDir
      */
     public function __construct($userDir)
@@ -72,15 +73,15 @@ class Finder
     }
 
     /**
-     * Traverses directories in a special order to find Mage.php in the shortest amount of time
+     * Traverses directories in a special order to find Mage.php in the shortest amount of time.
+     *
      * @param $baseDirectory
+     *
      * @return bool
      */
     public function MageFinder($baseDirectory)
     {
-
         if (!$this->iterateDir($baseDirectory)) {
-
             $dir_iterator = new RecursiveDirectoryIterator($baseDirectory, FilesystemIterator::SKIP_DOTS);
             $iterator = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
 
@@ -98,7 +99,6 @@ class Finder
                         true
                     )
                 ) {
-
                     if ($this->iterateDir($current->getPathname())) {
                         if ($this->initialized) {
                             return true;
@@ -118,6 +118,7 @@ class Finder
     /**
      * @param $baseDirectory
      * @param int $depth
+     *
      * @return bool|Finder
      */
     private function iterateDir($baseDirectory, $depth = 0)
@@ -138,8 +139,7 @@ class Finder
         $traversableDirs = array_keys($traverseDirs);
         $dirIterator = new DirectoryIterator($baseDirectory);
         while ($dirIterator->valid()) {
-
-            if ($dirIterator->isDir() && in_array($dirIterator->getFilename(), $traversableDirs)) {
+            if ($dirIterator->isDir() && in_array($dirIterator->getFilename(), $traversableDirs, true)) {
                 $dirType = $traverseDirs[$dirIterator->getFilename()]['type'];
 
                 // App/lib detected dir
@@ -180,6 +180,7 @@ class Finder
 
     /**
      * @param $path
+     *
      * @return $this
      */
     public function setMagePath($path)
@@ -197,5 +198,4 @@ class Finder
 
         return $this;
     }
-
 }

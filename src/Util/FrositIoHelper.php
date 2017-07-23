@@ -1,19 +1,19 @@
 <?php
 /**
- *     Magepatch - Magento Patches finder & verification utility
+ * Magepatch - Magento Patches finder & verification utility
  *
- *     @Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
- *     @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
+ * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 namespace GDPRProof\Util;
@@ -31,13 +31,10 @@ use Symfony\Component\Console\Style\StyleInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * Class FrositIoHelper
- *
- * @package GDPRProof\Util\Console\Helper
+ * Class FrositIoHelper.
  */
 class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInterface
 {
-
     /**
      * @var InputInterface
      */
@@ -83,7 +80,6 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
         return $this->helperSet;
     }
 
-
     /**
      * @var string
      */
@@ -98,7 +94,6 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 <green>=============================================================================</green>
 ';
 
-
     /**
      * Returns the canonical name of this helper.
      *
@@ -109,11 +104,10 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
         return 'frosit-io';
     }
 
-
     /**
      * FrositStyleHelper constructor.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function __construct(InputInterface $input = null, OutputInterface $output = null)
@@ -130,8 +124,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 
         $this->bufferedOutput = new BufferedOutput($output->getVerbosity(), false, clone $output->getFormatter());
         // Windows cmd wraps lines as soon as the terminal width is reached, whether there are following chars or not.
-        $this->lineLength = min($this->getTerminalWidth() - (int)(DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
-
+        $this->lineLength = min($this->getTerminalWidth() - (int) (DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
 
         parent::__construct($input, $output);
     }
@@ -143,6 +136,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 
     /**
      * @param $message
+     *
      * @return $this
      */
     public function info($message)
@@ -153,10 +147,11 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * A line that gets overridden by the next line
+     * A line that gets overridden by the next line.
      *
      * @param $message
      * @param null $value
+     *
      * @return $this
      */
     public function writeUpdate($message, $value = null)
@@ -172,8 +167,9 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 
     /**
      * @param array|string $messages
-     * @param bool $newline
-     * @param int $type
+     * @param bool         $newline
+     * @param int          $type
+     *
      * @return $this
      */
     public function write($messages, $newline = false, $type = self::OUTPUT_NORMAL)
@@ -185,9 +181,10 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * Error style
+     * Error style.
      *
-     * @param  array|string $message
+     * @param array|string $message
+     *
      * @return $this
      */
     public function error($message)
@@ -198,9 +195,10 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * Red style
+     * Red style.
      *
      * @param  $message
+     *
      * @return $this
      */
     public function red($message)
@@ -211,10 +209,11 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * Processes an key => value array into single line with formatting and lists it
+     * Processes an key => value array into single line with formatting and lists it.
      *
      * @param  $array
-     * @param  array $config
+     * @param array $config
+     *
      * @return mixed
      */
     public function listArrayKeyValue($array, array $config = [])
@@ -238,18 +237,19 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * Flatten array to dot notation
+     * Flatten array to dot notation.
      *
      * @param  $array
-     * @param  string $prefix
+     * @param string $prefix
+     *
      * @return array
      */
     public function flatten($array, $prefix = '')
     {
-        $result = array();
+        $result = [];
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                /**
+                /*
                  * @noinspection AdditionOperationOnArraysInspection
                  */
                 $result += $this->flatten($value, $prefix.$key.'.');
@@ -262,7 +262,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * Empty console screen
+     * Empty console screen.
      *
      * @return $this
      */
@@ -275,7 +275,8 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 
     /**
      * @param null $subtext
-     * @param int $newlines
+     * @param int  $newlines
+     *
      * @return $this
      */
     public function writeLogo($subtext = null, $newlines = 2)
@@ -295,8 +296,10 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
      * Writes a message to the output and adds a newline at the end.
      *
      * @param string|array $messages The message as an array of lines of a single string
-     * @param int $type
+     * @param int          $type
+     *
      * @internal param int $options A bitmask of options (one of the OUTPUT or VERBOSITY constants), 0 is considered the same as self::OUTPUT_NORMAL | self::VERBOSITY_NORMAL
+     *
      * @return $this
      */
     public function writeln($messages, $type = self::OUTPUT_NORMAL)
@@ -308,9 +311,10 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * Blank new line
+     * Blank new line.
      *
-     * @param  int $count
+     * @param int $count
+     *
      * @return $this
      */
     public function newLine($count = 1)
@@ -323,6 +327,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 
     /**
      * @param $messages
+     *
      * @return array
      */
     private function reduceBuffer($messages)
@@ -331,19 +336,21 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
         // Preserve the last 4 chars inserted (PHP_EOL on windows is two chars) in the history buffer
         return array_map(
             function ($value) {
-                return substr($value, -4);
+                return mb_substr($value, -4);
             },
-            array_merge(array($this->bufferedOutput->fetch()), (array)$messages)
+            array_merge([$this->bufferedOutput->fetch()], (array) $messages)
         );
     }
 
     /**
-     * A slightly modifed multiple-choice
+     * A slightly modifed multiple-choice.
      *
      * @todo   test
+     *
      * @param  $question
-     * @param  array $choices
-     * @param  null $default
+     * @param array $choices
+     * @param null  $default
+     *
      * @return string
      */
     public function multichoice($question, array $choices, $default = null)
@@ -359,7 +366,6 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
         return $this->askQuestion($choiceQuestion);
     }
 
-
     /**
      * @return int
      */
@@ -372,11 +378,13 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * Add a lot of different output styles
+     * Add a lot of different output styles.
      *
-     * @param    OutputInterface $output
-     * @param    bool $generate
+     * @param OutputInterface $output
+     * @param bool            $generate
+     *
      * @return OutputInterface
+     *
      * @internal param array $options
      * @internal param bool $override
      */
@@ -386,19 +394,19 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 
         // override default style
         $output->getFormatter()->setStyle('debug', new OutputFormatterStyle('magenta', 'white'));
-        $output->getFormatter()->setStyle('warning', new OutputFormatterStyle('red', 'yellow', array('bold')));
+        $output->getFormatter()->setStyle('warning', new OutputFormatterStyle('red', 'yellow', ['bold']));
         $output->getFormatter()->setStyle('info', new OutputFormatterStyle('blue'));
         $output->getFormatter()->setStyle('comment', new OutputFormatterStyle('green'));
 
         // auto-generate styles
         if ($generate) {
             // common options
-            $opts = array('bold', 'underscore');
+            $opts = ['bold', 'underscore'];
 
             // common colors
-            $colors = array('blue', 'green', 'yellow', 'red', 'cyan', 'white', 'default');
+            $colors = ['blue', 'green', 'yellow', 'red', 'cyan', 'white', 'default'];
 
-            /**
+            /*
              * Each color will be a style, for example
              * <green>some green text</green>
              * <blue>some blue text</blue>
@@ -407,8 +415,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
                 $output->getFormatter()->setStyle($color, new OutputFormatterStyle($color));
             }
 
-
-            /**
+            /*
              * Auto-generate colors with options by specified format.
              *
              * format: [[o]ption [color]] (first letter of option+color)
@@ -430,15 +437,15 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
              */
             foreach ($colors as $color) {
                 foreach ($opts as $opt) {
-                    $prefix = substr($opt, 0, 2);
+                    $prefix = mb_substr($opt, 0, 2);
                     $output->getFormatter()->setStyle(
                         $prefix.$color,
-                        new OutputFormatterStyle($color, null, array($opt))
+                        new OutputFormatterStyle($color, null, [$opt])
                     );
                 }
             }
 
-            /**
+            /*
              * Auto mix&match color foregrounds with backgrounds
              *
              * - prefix = $color[0] (first letter) + background
