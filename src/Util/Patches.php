@@ -16,12 +16,6 @@
  *     GNU General Public License for more details.
  */
 
-/**
- * Created by PhpStorm.
- * User: frosit
- * Date: 01/06/2017
- * Time: 23:05
- */
 
 namespace GDPRProof\Util;
 
@@ -85,7 +79,9 @@ class Patches
 
     /**
      * Filter patches collection by Magento installation
+     *
      * @param Mage $mage
+     * @param bool $filterByApplied
      * @return array|bool
      */
     public function getPatchesForMage(Mage $mage, $filterByApplied = true)
@@ -140,7 +136,7 @@ class Patches
                 if (file_exists($file) && is_readable($file)) {
                     $checksum = sha1_file($file);
                     if ($checksum !== $patch['checksum']) {
-                        echo "Checksums do not match for ".$patch['patchId']."\n";
+                        echo 'Checksums do not match for '.$patch['patchId']."\n";
                     }
                 }
             }

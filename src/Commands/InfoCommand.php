@@ -19,7 +19,7 @@
 
 namespace GDPRProof\Commands;
 
-use GDPRProof\Util\Patch;
+
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -50,9 +50,10 @@ class InfoCommand extends AbstractCommand
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      * @return int|null|void
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      * @throws \GDPRProof\Util\Patch\ParseException
      * @throws \InvalidArgumentException
      */

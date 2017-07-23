@@ -16,13 +16,6 @@
  *     GNU General Public License for more details.
  */
 
-/**
- * Created by PhpStorm.
- * User: frosit
- * Date: 01/06/2017
- * Time: 23:14
- */
-
 namespace GDPRProof\Util\Patch;
 
 
@@ -72,7 +65,7 @@ trait Filter
         $matches = [];
         foreach ($patches as $patch) {
             if ($patch['edition'] === $edition || $patch['edition'] === 'EE-CE') {
-                $matches[$patch['patchId']] = $patch;
+                $matches[$patch['uid']] = $patch;
             }
         }
 
@@ -91,8 +84,8 @@ trait Filter
 
         $matches = [];
         foreach ($patches as $patch) {
-            if (isset($patch['checksum_patch'])) {
-                if (in_array($patch['checksum_patch'], $appliedPatchesChecksums, true)) {
+            if (isset($patch['patchChecksum'])) {
+                if (in_array($patch['patchChecksum'], $appliedPatchesChecksums, true)) {
                     $patch['checksum_match'] = true;
                 }
             }

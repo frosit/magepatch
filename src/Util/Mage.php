@@ -176,7 +176,7 @@ class Mage
             if (strpos($edition, ',')) {
                 return 'EE-CE';
             }
-            $edition = trim(strtolower($edition));
+            $edition = strtolower(trim($edition));
             if (in_array($edition, ['community', 'comunity'], true)) { // for bad writers
                 return 'CE';
             }
@@ -220,7 +220,7 @@ class Mage
         if (!$this->hasLoaded()) {
             if ($path = $this->find($rootDir)) {
                 $this->rootDir = $path;
-            };
+            }
         }
 
         return $this;
@@ -245,7 +245,7 @@ class Mage
             $patchFile = $this->getRootDir().DIRECTORY_SEPARATOR.'app/etc/applied.patches.list'
         ))) {
             return false;
-        };
+        }
 
         if (file_exists($patchFile) && is_readable($patchFile)) { // double check
             $this->appliedPatches = []; // set ampty arr

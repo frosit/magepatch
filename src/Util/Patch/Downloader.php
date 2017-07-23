@@ -32,7 +32,7 @@ class Downloader
     /**
      * GIT Downloader URL
      */
-    const GIT = 'https://github.com/GDPRProof/magento-patches';
+    const GIT = 'https://github.com/brentwpeterson/magento-patches';
 
     /**
      * @param $patches
@@ -45,7 +45,7 @@ class Downloader
         $client = new Client(['base_uri' => self::GIT.DIRECTORY_SEPARATOR.'raw/master/']);
         $downloads = [];
         foreach ($patches as $patch) {
-            $downloadLocation = $to.DIRECTORY_SEPARATOR.$patch['patchId'].'.sh';
+            $downloadLocation = $to.DIRECTORY_SEPARATOR.$patch['uid'].'.sh';
             $download = $client->getAsync(
                 $patch['location'],
                 ['sink' => $downloadLocation]

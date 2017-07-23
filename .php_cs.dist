@@ -1,0 +1,48 @@
+<?php
+
+$fileHeaderComment = <<<COMMENT
+Magepatch - Magento Patches finder & verification utility
+
+@Copyright (c) 2017 Fabio Ros (FROSIT) <info@gdprproof.com> (https://gdprproof.com)
+@License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+COMMENT;
+
+$finder = PhpCsFixer\Finder::create()
+    ->notName('*Spec.php')
+    ->in(__DIR__)
+    ->exclude('vendor')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'header_comment' => ['header' => $fileHeaderComment, 'separate' => 'bottom','commentType'=>'PHPDoc'],
+        'linebreak_after_opening_tag' => true,
+        'mb_str_functions' => true,
+        'no_php4_constructor' => true,
+        'no_unreachable_default_argument_value' => true,
+        'no_useless_else' => true,
+        'no_useless_return' => true,
+        'ordered_imports' => true,
+        'php_unit_strict' => true,
+        'phpdoc_order' => true,
+        'semicolon_after_instruction' => true,
+        'strict_comparison' => true,
+        'strict_param' => true,
+    ])
+    ->setFinder($finder)
+    ->setCacheFile(__DIR__.'/.php_cs.cache')
+;

@@ -33,3 +33,10 @@ buildphar:
 	box build -vv
 	shasum magepatch.phar > magepatch.phar.version
 
+php-cs-fixer:
+	@echo "Fixing deprecated code styles..."
+	vendor/bin/php-cs-fixer fix --diff --dry-run -v
+
+php-cs-fixer-fix:
+	@echo "Fixing deprecated code styles..."
+	vendor/bin/php-cs-fixer fix -v

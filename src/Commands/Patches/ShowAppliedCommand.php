@@ -19,7 +19,7 @@
 namespace GDPRProof\Commands\Patches;
 
 use GDPRProof\Commands\AbstractCommand;
-use GDPRProof\Util\Patch;
+
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

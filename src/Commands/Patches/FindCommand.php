@@ -19,12 +19,17 @@
 namespace GDPRProof\Commands\Patches;
 
 use GDPRProof\Commands\AbstractCommand;
-use GDPRProof\Util\Patch;
-use GDPRProof\Util\Patch\Downloader;
+
+
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class FindCommand
+ *
+ * @package GDPRProof\Commands\Patches
+ */
 class FindCommand extends AbstractCommand
 {
 
@@ -75,9 +80,10 @@ EOF
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      * @return int|null|void
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      * @throws \Exception
      * @throws \GDPRProof\Util\Patch\ParseException
      */
@@ -128,7 +134,7 @@ EOF
      */
     protected function showStatusTable(array $patches) {
         $tablePatches = [];
-        $allowedKeys = ['patchId', 'supee', 'revision', 'checksum', 'applied'];
+        $allowedKeys = ['uid', 'supee', 'revision', 'checksum', 'applied'];
         foreach ($patches as $patch) {
             $tablePatch = [];
             foreach ($patch as $key => $value) {

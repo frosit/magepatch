@@ -39,13 +39,6 @@ __Actions__
 * patches:extract-diff
     * Extracts the .diff / .patch parts from the patch
 
-
-__About__
-
-When working with large stores, having to verify dozens of patches in complex and highly customised installations can be quite the task. In order to ensure a store's security, I had to make sure everything that was necessary to patch, was patched. When i found out the sources i relied on we're not complete, i started maintaining my own collection. Now the collection is complete, I've extracted some features out of my framework into this Symfony CLI tool for the community to use.
-
-My security framework has ben under development for over a year now and is coming close to a first release. This framework aids us in providing semi-automated security & monitoring services as well as judicial and compliancy related consultancy. Feel free to drop me a pm if you're interested to have a chat about that.
-
 __Author__
 
-Fabio Ros - GDPRProof.com (@frosit_it)    
+Fabio Ros - FROSIT (@frosit_it)    
