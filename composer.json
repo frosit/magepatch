@@ -1,8 +1,14 @@
 {
   "name": "frosit/magepatch",
-  "description": "helps to find Magento patches and verify them",
-  "type": "project",
+  "description": "A CLI Tool that helps find/ download the right patches for your Magento store.",
   "homepage": "https://github.com/frosit/magepatch",
+  "type": "project",
+  "license": "GPL-3.0",
+  "prefer-stable": true,
+  "minimum-stability": "stable",
+  "support": {
+    "issues": "https://github.com/frosit/magepatch/issues"
+  },
   "keywords": [
     "magento",
     "Patch",
@@ -11,17 +17,16 @@
     "SUPEE",
     "finder"
   ],
-  "license": "GPL-3.0",
-  "prefer-stable": true,
   "authors": [
     {
       "name": "Fabio Ros",
-      "email": "fabio@frosit.nl",
-      "role": "Developer"
+      "email": "info@frosit.nl",
+      "role": "Developer",
+      "homepage": "http://fros.it"
     }
   ],
-  "minimum-stability": "stable",
   "require": {
+    "php": "^5.5",
     "symfony/console": "^3.2",
     "symfony/yaml": "^3.2",
     "version/version": "^2.1",
@@ -29,13 +34,17 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.4",
-    "phpspec/phpspec": "^4.0",
-    "phpunit/phpunit": "^6.2",
-    "squizlabs/php_codesniffer": "^3.0"
+    "phpspec/phpspec": "^3.4",
+    "phpunit/phpunit": "^4.8"
   },
   "autoload": {
     "psr-4": {
       "Frosit\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Frosit\\": "tests"
     }
   },
   "extra": {

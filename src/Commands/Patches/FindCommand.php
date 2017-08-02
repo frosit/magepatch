@@ -27,6 +27,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class FindCommand.
+ *
+ * @todo extend help text
  */
 class FindCommand extends AbstractCommand
 {
@@ -36,6 +38,7 @@ class FindCommand extends AbstractCommand
 
     /**
      * {@inheritdoc}
+     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure()
@@ -48,7 +51,7 @@ class FindCommand extends AbstractCommand
                 InputOption::VALUE_OPTIONAL,
                 'Specify a different edition e.g. EE or enterprise'
             )
-            ->setDescription('Automatically verify installed patch and find / download missing ones.')
+            ->setDescription('Automatically verify installed patches and find/ download missing ones.')
             ->setHelp(
                 <<<'EOF'
 The <info>%command.name%</info> command finds patches for a certain installation.
@@ -87,9 +90,11 @@ EOF
      *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      * @throws \Exception
-     * @throws \GDPRProof\Util\Patch\ParseException
+     * @throws \Frosit\Util\Patch\ParseException
      *
      * @return int|null|void
+     * @throws \RuntimeException
+     * @throws \LogicException
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -97,7 +102,7 @@ EOF
 
         $this->fio->writeUpdate('Fetching Magento info...');
         if ($this->getMage() && $this->getMageInfo()) {
-            $this->fio->writeUpdate('Magento found at:', $this->baseDir);
+            $this->fio->writeUpdate('Magento found at: ', $this->baseDir);
             $this->fio->writeUpdate('Loading patches...');
 
             $patches = $this->getPatches()->getPatchesForMage($this->getMage(), false);
@@ -107,7 +112,7 @@ EOF
                 if ($appliedPatches = $this->getMage()->getAppliedPatches()) {
                     $this->fio->writeUpdate('Applied Patches: ', count($appliedPatches));
                 } else {
-                    $this->fio->comment('No patches we\'re applied or no applied.patches.list was found');
+                    $this->fio->comment('No patches we\'re applied or no applied.patches file was found.');
                 }
 
                 $this->showStatusTable($patches);
@@ -123,7 +128,7 @@ EOF
                         if ($this->fio->confirm('Would you like to download the missing patches?')) {
                             $this->fio->writeln('Downloading patches...');
                             $this->getPatches()->downloadPatches($notApplied, $this->getMage()->getRootDir());
-                            $this->fio->success('Patches downloaded');
+                            $this->fio->success('Patches downloaded.');
                         }
                     }
                 }
@@ -139,7 +144,7 @@ EOF
     protected function showStatusTable(array $patches)
     {
         $tablePatches = [];
-        $allowedKeys = ['uid', 'supee', 'revision', 'checksum', 'applied'];
+        $allowedKeys = ['UID', 'SUPEE', 'revision', 'checksum', 'applied'];
         foreach ($patches as $patch) {
             $tablePatch = [];
             foreach ($patch as $key => $value) {

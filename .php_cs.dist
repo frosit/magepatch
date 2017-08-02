@@ -22,6 +22,7 @@ COMMENT;
 $finder = PhpCsFixer\Finder::create()
     ->notName('*Spec.php')
     ->in(__DIR__.'/src')
+    ->in(__DIR__.'/tests')
     ->exclude('vendor')
 ;
 

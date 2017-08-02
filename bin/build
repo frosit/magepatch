@@ -1,0 +1,193 @@
+#!/usr/bin/env bash
+#
+#   FROSCLI - a bash helper for Guard project dependencies.
+#   ----------------------------------------------------------------------------
+#
+#      ~ Copyright (c) 2017 Fabio Ros
+#
+# ===================================
+# Helper scripts
+# Make sure box is installed globally using composer
+dir=$( dirname "${0}")
+proj_dir=$(realpath "${dir}/..")
+vendor_bin_dir=$(realpath "${proj_dir}/vendor/bin")
+
+box=$(which box)
+php=$(which php)
+composer=$(which composer)
+
+now="$(date +'%d-%m-%Y')"
+export Black='\033[0;30m'        # Black
+export Red='\033[0;31m'          # Red
+export Green='\033[0;32m'        # Green
+export Yellow='\033[0;33m'       # Yellow
+export Blue='\033[0;34m'         # Blue
+export NC="\033[0m"              # Color Reset
+
+VERSION="1.0.0"
+SCRIPT=${0##*/}
+
+USAGE="\
+ ${Blue}MagePatch${NC} ${Green}(v${VERSION})${NC}
+
+ >  ${Blue}Usage:${NC} ${Green}${SCRIPT}${NC} [arg] --[opts]
+
+ ${Blue}Commands:${NC}
+    ${Yellow}install${NC}                   Install all magepatch assets
+    ${Yellow}magepatch${NC}                 Run MagePatch
+
+    ${Yellow}build-phar${NC}                Build a new phar
+    ${Yellow}clean${NC}                     Clean project directory
+    ${Yellow}fetch-patches${NC}             Fetch a new patches.json file
+    ${Yellow}test-setup${NC}                Installs Magento test setup
+    ${Yellow}run-tests${NC}                 Runs PHPUnit and PHPSpec
+    ${Yellow}cs-check${NC}                  Get a dry-run overview of cs fixes
+    ${Yellow}cs-fix${NC}                  Correct CS
+
+    ${Yellow}composer${NC}                  Run Composer
+    ${Yellow}phpunit${NC}                   Run PHPUnit tests
+    ${Yellow}phpspec${NC}                   Run PHPSpec tests
+
+ ${Blue}Optional arguments:${NC}
+    ${Yellow}-h, --help${NC}                  Show this help menu
+
+ ${Blue}Environment:${NC}
+    ${Yellow}- Box${NC} :                     ${box}
+    ${Yellow}- PHP${NC} :                     ${php}
+    ${Yellow}- composer${NC} :                ${composer}
+"
+
+# Help function
+help(){
+    echo -e "$USAGE"
+    exit
+}
+
+# Shutdown
+shutdown(){
+    echo -e "${Green}Done..${NC}"
+    exit
+}
+
+## Call help if no arg
+if [ $# -eq 0 ]; then
+    help
+fi
+
+### Set arg as action
+arg=$1;shift
+
+### Try to fetch params
+while [[ $# -gt 0 ]]
+    do
+        param=$1
+    case $param in
+        -l|list|show)
+        LIST=true
+        ;;
+        --env=*)
+        ENV="${param#*=}"
+        shift
+        ;;
+        *)
+                # unknown option
+        ;;
+    esac
+    shift # past argument or value
+done
+
+# Calling dependencys
+function magepatch(){
+    cd "${proj_dir}"
+    ${php} "bin/console" $@
+}
+function phpunit(){
+    cd "${proj_dir}"
+    ${php} "vendor/bin/phpunit" $@
+}
+function phpspec(){
+    cd "${proj_dir}"
+    ${php} "vendor/bin/phpspec" $@
+}
+function composer(){
+    cd "${proj_dir}"
+    $composer $@
+}
+function php-cs-fixer(){
+    cd "${proj_dir}"
+    ${php} "vendor/bin/php-cs-fixer" $@
+}
+
+# = Ensure box file was created from dist
+ensureBox(){
+    if [ ! -f "${dir}/box.json" ]; then
+        cp "${dir}/box.json.dist" "${dir}/box.json"
+     fi
+}
+
+install(){
+    $composer install
+}
+
+# = Build a new Phar
+build-phar(){
+    echo -e "Building phar"
+    echo -e "Removing dev dependencies"
+    $composer update --no-dev -o
+    ensureBox
+    echo -e "Rebuilding"
+    $box build -vv
+    shasum magepatch.phar > magepatch.phar.version
+    echo -e "${Green}$(cat magepatch.phar.version)${NC}"
+    echo -e "Don't forget to upload a new version!"
+}
+
+# Clean project directory
+clean(){
+    echo -e "Cleaning project directory"
+    if [ -f "${proj_dir}/public" ]; then rm -Rf "${proj_dir}/public"; fi
+    if [ -f "${proj_dir}/magepatch.phar" ]; then rm -Rf "${proj_dir}/magepatch.phar"; fi
+    if [ -f "${proj_dir}/.magedir" ]; then rm -Rf "${proj_dir}/.magedir"; fi
+    if [ -f "${proj_dir}/.php_cs_cache" ]; then rm -Rf "${proj_dir}/.php_cs_cache"; fi
+    if [ -f "${proj_dir}/box.json" ]; then rm -Rf "${proj_dir}/box.json"; fi
+    if [ -f "${proj_dir}/phpunit.xml" ]; then rm -Rf "${proj_dir}/phpunit.xml"; fi
+    if [ -f "${proj_dir}/phpspec.xml" ]; then rm -Rf "${proj_dir}/phpspec.xml"; fi
+}
+
+fetch-patches(){
+	echo -e "Fetching patches..."
+	if [ -f "${proj_dir}/res/patches.json" ]; then rm -Rf "${proj_dir}/res/patches.json"; fi
+	curl http://magepatch.gdprproof.com/patches.json > "${proj_dir}/res/patches.json"
+	echo -e "Be sure to double check the timestamp, this repo may be faster"
+}
+
+test-setup(){
+    if [ ! -f "${proj_dir/public/app/etc/config.xml}" ]; then
+        echo -e "Installing test setup..."
+        sh ${proj_dir}/build/local/test_setup.sh
+    else
+        echo -e "Installation was found..."
+    fi
+}
+
+run-tests(){
+    echo -e "Running tests"
+    phpunit -v --debug
+    phpspec run -f pretty -v
+}
+
+cs-check(){
+    echo -e "Checking code style..."
+    php-cs-fixer fix --diff --dry-run -v
+}
+
+cs-fix(){
+    echo -e "Fixing code style..."
+    php-cs-fixer  fix -v
+}
+
+arg=$1;shift
+
+${arg%%/} $@
+
+trap shutdown EXIT

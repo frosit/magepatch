@@ -1,5 +1,5 @@
 {
-  "banner":"MagePatch - Fabio Ros (GDPRProof)",
+  "banner":"MagePatch - Fabio Ros (FROSIT)",
   "alias":"magepatch.phar",
   "chmod": "0755",
   "compression": "GZ",

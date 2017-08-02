@@ -1,20 +1,21 @@
-Magento Patch finder
-===================
-    
-The following is a small phar solution i made based on the patch verification solution within my Magento Security Framework. The console utility basically finds the right patches for your Magento installation based on the stores' version and edition. I've aggregated an index of all patches for this as part of my security solution. This indexed data is being matched against the store using semantic versioning, and filtered using the applied.patches file. It provides some additionally features to aid in patch work like auto-downloading, extracting the diff's, matching checksums etc.
+Magento Patch finder (Magepatch)
+================================
 
-__Note: work in progress__
+| Branch        | Status       | Version  |
+| ------------- |:-------------|:---------|
+| Master        | [![Build Status](https://travis-ci.org/frosit/magepatch.svg?branch=master)](https://travis-ci.org/frosit/magepatch) | ---------|
+| Staging       | [![Build Status](https://travis-ci.org/frosit/magepatch.svg?branch=staging)](https://travis-ci.org/frosit/magepatch)  | ---------|
 
-[Magento Patch Finder](https://github.com/frosit/magepatch)
+The following CLI tool can aid with patch management of your Magento 1 store. The console utility/phar file basically finds the right patches for your Magento installation based on the stores' version and edition. It contains an index of all patches and uses [magento-patches repository](https://github.com/brentwpeterson/magento-patches) as it's data source. This data is aggregated and reviewed before added to the index.
+If you spot an issue, you can modify the json file in the res directory.
 
-All patches and information used are publicly available in the [magento-patches](https://github.com/brentwpeterson/magento-patches) repository which is now according to my data, complete. My framework has  features for collecting and aggregating this kind of patch data which i then contribute. The features that aggregate the data are not in there. My framework periodically updates the [patch index json file](http://magepatch.gdprproof.com/patches.json).
+__Note: work in progress, feel free to contribute__
 
 __Install__
 
 ```bash
 wget -q -O magepatch.phar http://magepatch.gdprproof.com/magepatch.phar && chmod +x magepatch.phar
 ```
-
 
 __Build (dev)__
 
@@ -23,30 +24,47 @@ git clone https://github.com/frosit/magepatch.git && \
 cd magento-patch-finder && make install && make build
 ```
 
-__ASCIICast__
 
-[![asciicast](https://asciinema.org/a/e5vm43gygt1m2wx9d9q4ccxbb.png)](https://asciinema.org/a/e5vm43gygt1m2wx9d9q4ccxbb)
+__Commands__
 
-
-__Actions__
-
-* patches:find
+* _patches:find_
     * finds patches based on your version number
     * compares towards applied.patches.list
     * allows to download missing patches
-* patches:show-applied
+* _patches:show-applied_
     * Show what is applied and what not
-* patches:extract-diff
+* _patches:extract-diff_
     * Extracts the .diff / .patch parts from the patch
+    
+__Troubleshooting__
+
+It should work if you drop it into a bin folder and navigate to a mage root folder. Additionally you could keep the .phar in your mage root as well.
+Else you could use these options.
+
+* --mage=\[directory\] | set a fixed path to the mage root dir.
+* --nomage | don't load mage, in case you want to quickly check the amount of indexed patches or something
+
     
 __To Do__
 
 * Review and clean code
 * Remove deprecated code
 * Create tests with CI
+    * Fix broken tests
+    * extend tests to other classes
+    * extend spec
+    * add codecov
 * improve exception handling
+* Show phar version
+* phar selfupdate
+* Fix travis Magento install script
+* Add patch installers to tests, or applied.patches fixtures
+* Extend documentation
+* Convert bullets to issues
 * Magerun integration?
+
+[![codecov](https://codecov.io/gh/frosit/magepatch/branch/master/graph/badge.svg)](https://codecov.io/gh/frosit/magepatch)
 
 __Author__
 
-Fabio Ros - FROSIT (@frosit_it)    
+Fabio Ros - FROSIT (@frosit_it)

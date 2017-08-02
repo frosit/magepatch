@@ -1,5 +1,7 @@
 all: @install
 
+build: @install @buildphar
+
 install:
 	composer install
 
@@ -11,32 +13,33 @@ clean:
 	rm -Rf ./public
 	rm magepatch.phar
 	rm .magedir
+	rm .php_cs_cache
+	rm box.json
 
 update:
 	composer update
 
 phpunit:
-	vendor/bin/phpunit
+	vendor/bin/phpunit -v --debug
 
-cscheck:
-	php vendor/bin/phpcs --colors --standard=PSR2 --extensions=php src/
-
-csfix:
-	php vendor/bin/phpcbf --colors --standard=PSR2 --extensions=php src/
+phpspec:
+	vendor/bin/phpspec run -f pretty -v
 
 update-index:
+	@echo "Be sure to double check the timestamp, this repo may be faster"
 	rm res/patches.json
 	wget http://magepatch.gdprproof.com/patches.json && mv patches.json res/
 	echo "Updated patch data"
 
 buildphar:
+	composer update --no-dev -o
 	box build -vv
 	shasum magepatch.phar > magepatch.phar.version
 
-php-cs-fixer:
-	@echo "Fixing deprecated code styles..."
+cs-fixer:
+	@echo "Displaying code style..."
 	vendor/bin/php-cs-fixer fix --diff --dry-run -v
 
-php-cs-fixer-fix:
-	@echo "Fixing deprecated code styles..."
+cs-fix:
+	@echo "Fixing code style..."
 	vendor/bin/php-cs-fixer fix -v

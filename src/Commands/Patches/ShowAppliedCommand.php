@@ -37,18 +37,20 @@ class ShowAppliedCommand extends AbstractCommand
 
     /**
      * {@inheritdoc}
+     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure()
     {
         $this->setName('patches:show-applied')
             ->addArgument('patchfile', InputArgument::OPTIONAL, 'Path of the applied.patches file', false)
-            ->setDescription('Show installed patches using the applied file');
+            ->setDescription('Show installed patches using the applied.patches file.');
     }
 
     /**
      * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @throws \InvalidArgumentException
      */
     public function initialize(InputInterface $input, OutputInterface $output)
@@ -100,7 +102,7 @@ class ShowAppliedCommand extends AbstractCommand
         $patches
     ) {
         $tablePatches = [];
-        $allowedKeys = ['checksum', 'revision', 'version', 'supee', 'date'];
+        $allowedKeys = ['checksum', 'revision', 'version', 'SUPEE', 'date'];
 
         foreach ($patches as $patch) {
             $tablePatch = [];

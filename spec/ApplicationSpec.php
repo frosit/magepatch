@@ -3,7 +3,6 @@
 namespace spec\Frosit;
 
 use Frosit\Application;
-use Frosit\Util\Mage;
 use PhpSpec\ObjectBehavior;
 
 class ApplicationSpec extends ObjectBehavior

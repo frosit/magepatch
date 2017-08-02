@@ -28,8 +28,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-ini_set('display_errors', 1);
-
 /**
  * Class ShowAppliedCommand.
  */
@@ -42,6 +40,7 @@ class ExtractDiffCommand extends AbstractCommand
 
     /**
      * {@inheritdoc}
+     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure()
@@ -54,7 +53,7 @@ class ExtractDiffCommand extends AbstractCommand
                 false
             )
             ->addOption('recursive', 'r', InputOption::VALUE_NONE, 'Extract diffs recursively')
-            ->setDescription('Extract the diff part off the patch file.');
+            ->setDescription('Extract the diff part from the patch file (strips away all bash).');
     }
 
     /**
@@ -78,12 +77,12 @@ class ExtractDiffCommand extends AbstractCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->fio->title('Magento Patch Finder - Diff extractor');
+        $this->fio->title('Magento Patch Finder - Diff Extractor');
 
+        // @todo use hasLoaded to check for initialisation
         if (!$input->getArgument('path')) {
             $path = $this->getMage()->getRootDir().DIRECTORY_SEPARATOR.'var'.DIRECTORY_SEPARATOR.'patches';
         } else {
-            // @todo what is this
             $path = $input->getArgument('path');
             if (!file_exists($path) || !is_readable($path)) {
                 $this->fio->error('No path specified, add a custom path or specify magento\'s location');
@@ -109,9 +108,9 @@ class ExtractDiffCommand extends AbstractCommand
 
         if (count($patchFiles) <= 0) {
             $this->fio->writeln(
-                'Could not find any '.count(
+                'Could not find '.count(
                     $patchFiles
-                ).' patch files to extract from or that were not already extracted.'
+                ).' patch files to extract something from that wasn\'t already extracted.'
             );
             exit(1);
         }
@@ -131,7 +130,7 @@ class ExtractDiffCommand extends AbstractCommand
         $diffFiles = [];
         foreach ($toProcess as $patchFile) {
             $diffFiles[] = $diffFile = Diff::extractDiff($patchFile, $path);
-            $this->fio->writeUpdate('Converted Diff: ', $diffFile);
+            $this->fio->writeUpdate('Extracted Diff: ', $diffFile);
         }
 
         if (count($diffFiles) > 1) {

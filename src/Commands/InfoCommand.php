@@ -34,12 +34,13 @@ class InfoCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('info')
-            ->setDescription('A general information command');
+            ->setDescription('Show information regarding the current environment.');
     }
 
     /**
      * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @throws \InvalidArgumentException
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
@@ -57,7 +58,7 @@ class InfoCommand extends AbstractCommand
      * @param OutputInterface $output
      *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
-     * @throws \GDPRProof\Util\Patch\ParseException
+     * @throws \Frosit\Util\Patch\ParseException
      * @throws \InvalidArgumentException
      *
      * @return int|null|void

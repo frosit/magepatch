@@ -120,6 +120,7 @@ class Patches
     /**
      * @param $patches
      * @param $basedir
+     *
      * @throws \LogicException
      * @throws \RuntimeException
      */

@@ -216,7 +216,8 @@ class Mage
             try {
                 $this->rootDir = \Mage::getBaseDir();
             } catch (MageException $e) {
-                echo $e->getMessage();
+                echo $e->getMessage().PHP_EOL;
+                $this->rootDir = false;
             }
         }
 
