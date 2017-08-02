@@ -44,6 +44,7 @@ __To Do__
 * Review and clean code
 * Remove deprecated code
 * Create tests with CI
+* improve exception handling
 * Magerun integration?
 
 __Author__

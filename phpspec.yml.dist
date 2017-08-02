@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Frosit
+        psr4_prefix: Frosit
+        src_path: src
