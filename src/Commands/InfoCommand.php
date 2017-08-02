@@ -2,8 +2,7 @@
 /**
  * Magepatch - Magento Patches finder & verification utility
  *
- * @Copyright (c) 2017 Fabio Ros (FROSIT) <info@frosit.nl> (https://frosit.nl)
- * @License GNU GPLv3  (http://www.gnu.org/licenses/gpl-3.0.txt)
+ * Copyright (c) 2017 Fabio Ros <fabio@frosit.nl> (https://frosit.nl)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +13,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
 namespace GDPRProof\Commands;
@@ -35,6 +37,12 @@ class InfoCommand extends AbstractCommand
             ->setDescription('A general information command');
     }
 
+    /**
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @throws \InvalidArgumentException
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     */
     public function initialize(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('mage')) {
