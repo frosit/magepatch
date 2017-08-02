@@ -25,7 +25,7 @@
  * Time: 21:53.
  */
 
-namespace GDPRProof\Util;
+namespace Frosit\Util;
 
 /**
  * Class MageException.

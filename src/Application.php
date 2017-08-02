@@ -18,15 +18,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-namespace GDPRProof;
+namespace Frosit;
 
 use Composer\Autoload\ClassLoader;
-use GDPRProof\Commands\InfoCommand;
-use GDPRProof\Commands\Patches\ExtractDiffCommand;
-use GDPRProof\Commands\Patches\FindCommand;
-use GDPRProof\Commands\Patches\ShowAppliedCommand;
-use GDPRProof\Util\FrositIoHelper;
-use GDPRProof\Util\Mage;
+use Frosit\Commands\InfoCommand;
+use Frosit\Commands\Patches\ExtractDiffCommand;
+use Frosit\Commands\Patches\FindCommand;
+use Frosit\Commands\Patches\ShowAppliedCommand;
+use Frosit\Util\FrositIoHelper;
+use Frosit\Util\Mage;
 use Phar;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;

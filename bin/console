@@ -20,7 +20,7 @@
  */
 
 use Composer\Autoload\ClassLoader;
-use GDPRProof\Application;
+use Frosit\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 
 /** @var ClassLoader $loader */

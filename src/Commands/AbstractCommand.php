@@ -18,12 +18,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-namespace GDPRProof\Commands;
+namespace Frosit\Commands;
 
-use GDPRProof\Application;
-use GDPRProof\Util\FrositIoHelper;
-use GDPRProof\Util\Mage;
-use GDPRProof\Util\Patches;
+use Frosit\Application;
+use Frosit\Util\FrositIoHelper;
+use Frosit\Util\Mage;
+use Frosit\Util\Patches;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

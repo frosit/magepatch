@@ -18,9 +18,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-namespace GDPRProof\Commands\Patches;
+namespace Frosit\Commands\Patches;
 
-use GDPRProof\Commands\AbstractCommand;
+use Frosit\Commands\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

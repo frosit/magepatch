@@ -8,7 +8,8 @@
     "Patch",
     "patches",
     "console",
-    "SUPEE"
+    "SUPEE",
+    "finder"
   ],
   "license": "GPL-3.0",
   "prefer-stable": true,
@@ -22,17 +23,18 @@
   "minimum-stability": "stable",
   "require": {
     "symfony/console": "^3.2",
+    "symfony/yaml": "^3.2",
     "version/version": "^2.1",
     "guzzlehttp/guzzle": "^6.3"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.4",
-    "phpunit/phpunit": "4.5.*",
+    "phpspec/phpspec": "^4.0",
+    "phpunit/phpunit": "^6.2",
     "squizlabs/php_codesniffer": "^3.0"
   },
   "autoload": {
     "psr-4": {
-      "GDPRProof\\": "src/",
       "Frosit\\": "src/"
     }
   },

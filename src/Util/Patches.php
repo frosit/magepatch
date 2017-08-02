@@ -18,12 +18,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-namespace GDPRProof\Util;
+namespace Frosit\Util;
 
 use DateTime;
-use GDPRProof\Util\Patch\Downloader;
-use GDPRProof\Util\Patch\Filter;
-use GDPRProof\Util\Patch\ParseException;
+use Frosit\Util\Patch\Downloader;
+use Frosit\Util\Patch\Filter;
+use Frosit\Util\Patch\ParseException;
 use Version\Version;
 
 /**
