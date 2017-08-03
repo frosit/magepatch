@@ -34,6 +34,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Class FrositIoHelper.
+ *
+ * This is a personal class, mostly for styling console output
  */
 class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInterface
 {
@@ -83,18 +85,9 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     }
 
     /**
-     * @var string
+     * @var string $logo
      */
-    public static $logo = '
- ██████╗ ██████╗ ██████╗ ██████╗ ██████╗ ██████╗  ██████╗  ██████╗ ███████╗
-██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔═══██╗██╔═══██╗██╔════╝
-██║  ███╗██║  ██║██████╔╝██████╔╝██████╔╝██████╔╝██║   ██║██║   ██║█████╗  
-██║   ██║██║  ██║██╔═══╝ ██╔══██╗██╔═══╝ ██╔══██╗██║   ██║██║   ██║██╔══╝  
-╚██████╔╝██████╔╝██║     ██║  ██║██║     ██║  ██║╚██████╔╝╚██████╔╝██║     
- ╚═════╝ ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝                                                    
-<blue>-------------------</blue>  <comment>Security & Compliancy company</comment>   <blue>------------------------</blue> 
-<green>=============================================================================</green>
-';
+    public static $logo = '';
 
     /**
      * Returns the canonical name of this helper.
@@ -126,7 +119,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
 
         $this->bufferedOutput = new BufferedOutput($output->getVerbosity(), false, clone $output->getFormatter());
         // Windows cmd wraps lines as soon as the terminal width is reached, whether there are following chars or not.
-        $this->lineLength = min($this->getTerminalWidth() - (int) (DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
+        $this->lineLength = min($this->getTerminalWidth() - (int)(DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
 
         parent::__construct($input, $output);
     }
@@ -154,7 +147,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     /**
      * A line that gets overridden by the next line.
      *
-     * @param $message
+     * @param      $message
      * @param null $value
      *
      * @return $this
@@ -216,7 +209,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     /**
      * Processes an key => value array into single line with formatting and lists it.
      *
-     * @param  $array
+     * @param       $array
      * @param array $config
      *
      * @return mixed
@@ -244,7 +237,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
     /**
      * Flatten array to dot notation.
      *
-     * @param  $array
+     * @param        $array
      * @param string $prefix
      *
      * @return array
@@ -343,7 +336,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
             function ($value) {
                 return mb_substr($value, -4);
             },
-            array_merge([$this->bufferedOutput->fetch()], (array) $messages)
+            array_merge([$this->bufferedOutput->fetch()], (array)$messages)
         );
     }
 
@@ -352,7 +345,7 @@ class FrositIoHelper extends SymfonyStyle implements OutputInterface, StyleInter
      *
      * @todo   test
      *
-     * @param  $question
+     * @param       $question
      * @param array $choices
      * @param null  $default
      *

@@ -41,7 +41,6 @@ class InfoCommandTest extends TestCase
     public function setUp()
     {
         $this->command = new InfoCommand();
-        $this->getApplication()->add($this->command);
     }
 
     /**
@@ -70,7 +69,7 @@ class InfoCommandTest extends TestCase
     public function testExecuteListsCommands()
     {
         if (!$this->getMageDir()) {
-            $this->markTestSkipped('No mage dir found...');
+            $this->markTestSkipped('Could not find a Magento Directory.');
         } else {
             $command = new InfoCommand();
             $command->setApplication(new Application());
@@ -81,15 +80,67 @@ class InfoCommandTest extends TestCase
                 ['decorated' => false]
             );
 
-            $this->assertRegExp('/Magento Location/', $commandTester->getDisplay());
+            $this->assertRegExp(
+                '/Magento Location/',
+                $commandTester->getDisplay(),
+                'The command returned no Magento location.'
+            );
+            $this->assertRegExp('/App Version:/', $commandTester->getDisplay(), 'The command returned no app version');
+        }
+    }
+
+    public function testExecuteNoMageParameter()
+    {
+        $command = new InfoCommand();
+        $command->setApplication(new Application());
+        $commandTester = new CommandTester($command);
+
+        $commandTester->execute(
+            ['command' => $command->getName(), '--nomage' => true],
+            ['decorated' => false]
+        );
+
+        $output = $commandTester->getDisplay();
+
+        $this->assertNotRegExp('/Magento Location/', $output, 'The command returned no Magento location.');
+        $this->assertContains('App Version', $output, 'The command returned no app version');
+    }
+
+    public function testExecuteFindMageDirectory()
+    {
+        if (defined('ROOTDIR') && file_exists(ROOTDIR.DIRECTORY_SEPARATOR.'.magedir')) {
+            $mageDir = trim(file_get_contents(ROOTDIR.DIRECTORY_SEPARATOR.'.magedir'));
+            if (!file_exists($mageDir) || !chdir($mageDir)) {
+                $this->markTestSkipped('Could not step into a Magento Directory for this test.');
+            }
+
+
+            $command = new InfoCommand();
+            $command->setApplication(new Application());
+            $commandTester = new CommandTester($command);
+
+            $commandTester->execute(
+                ['command' => $command->getName()],
+                ['decorated' => false]
+            );
+
+            $output = $commandTester->getDisplay();
+            $this->assertContains('Magento Location', $output, 'The command returned no Magento location.');
+            $this->assertContains('App Version', $output, 'The command returned no app version');
         }
     }
 
     public function testAttributes()
     {
-        $this->assertClassHasAttribute('input', InfoCommand::class);
-        $this->assertClassHasAttribute('output', InfoCommand::class);
-        $this->assertClassHasAttribute('fio', InfoCommand::class);
-        $this->assertClassHasAttribute('mage', InfoCommand::class);
+        $this->assertClassHasAttribute('input', InfoCommand::class, 'Class misses attribute');
+        $this->assertClassHasAttribute('output', InfoCommand::class, 'Class misses attribute');
+        $this->assertClassHasAttribute('fio', InfoCommand::class, 'Class misses attribute');
+        $this->assertClassHasAttribute('mage', InfoCommand::class, 'Class misses attribute');
+    }
+
+    public function tearDown()
+    {
+        unset($this->command);
+        parent::tearDown();
     }
 }

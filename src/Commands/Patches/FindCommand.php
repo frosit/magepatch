@@ -144,11 +144,14 @@ EOF
     protected function showStatusTable(array $patches)
     {
         $tablePatches = [];
-        $allowedKeys = ['UID', 'SUPEE', 'revision', 'checksum', 'applied'];
+        $allowedKeys = ['uid', 'supee', 'revision', 'fileChecksum', 'applied'];
         foreach ($patches as $patch) {
             $tablePatch = [];
             foreach ($patch as $key => $value) {
                 if (in_array($key, $allowedKeys, true)) {
+                    if ($key === 'applied') {
+                        $value = '<green>yes</green>' ?: '<red>no</red>';
+                    }
                     $tablePatch[$key] = $value;
                 }
             }

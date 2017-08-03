@@ -46,7 +46,7 @@ class InfoCommand extends AbstractCommand
      */
     public function initialize(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->getOption('mage')) {
+        if (!$input->getOption('mage') || $input->getOption('nomage')) {
             $this->nomage = true;
         }
 
@@ -76,7 +76,7 @@ class InfoCommand extends AbstractCommand
             $output->writeln('* <info>Last indexed: </info>'.$lastIndexed);
         }
 
-        if ($this->getMage()->hasLoaded()) {
+        if (!$this->nomage && $this->getMage()->hasLoaded()) {
             $output->writeln('* <info>Magento Version: </info>'.$this->getMage()->getVersion());
             $output->writeln('* <info>Magento Edition: </info>'.$this->getMage()->getEdition());
             $output->writeln('* <info>Magento Location: </info>'.$this->getMage()->getRootDir());

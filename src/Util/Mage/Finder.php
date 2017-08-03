@@ -29,7 +29,7 @@ use SplFileInfo;
 /**
  * Class Mage.
  *
- * A conceptual Mage finder class.
+ * A conceptual Mage finder class, currently unstable.
  *
  * @deprecated
  */

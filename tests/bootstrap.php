@@ -46,9 +46,9 @@ if (file_exists($mageDir) && file_get_contents($mageDir)) {
 define('APPDIR', dirname(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'.'));
 define('PHARDIR', Phar::running());
 if (PHARDIR) {
-    define('ROOTDIR', PHARDIR);
+    define('ROOTDIR', realpath(PHARDIR));
 } else {
-    define('ROOTDIR', APPDIR);
+    define('ROOTDIR', realpath(APPDIR));
 }
 @session_start();
 $loader = require __DIR__.'/../vendor/autoload.php';

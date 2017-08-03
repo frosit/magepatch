@@ -24,7 +24,8 @@ if [ ! -z ${MAGENTO_VERSION+x} ]; then
         mysql -u"${db_user}" -p"${db_pass}" -e 'CREATE DATABASE IF NOT EXISTS `magento_travis`;'
     fi;
 
-    target_directory="${SETUP_DIR:-./}${MAGENTO_VERSION}"
+    # target_directory="${SETUP_DIR:-./}${MAGENTO_VERSION}"
+    target_directory="${SETUP_DIR:-./}public"
     echo $(readlink -f "${target_directory}") > .magedir
 
     export N98_MAGERUN_TEST_MAGENTO_ROOT="${target_directory}"

@@ -22,6 +22,7 @@ namespace Frosit\Util\Patch;
 
 /**
  * Class ParseException.
+ * @todo extend exception
  */
 class ParseException extends \Exception
 {

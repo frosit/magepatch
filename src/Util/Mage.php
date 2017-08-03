@@ -84,6 +84,18 @@ class Mage
             } elseif (in_array('app', scandir($path, SCANDIR_SORT_NONE), true)) {
                 $this->initMage($path.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'Mage.php');
             } else {
+
+                // Hotfix for faster mage finder when not in mage dir
+                if ($this->findMageOneDirectoryBelow($path)) {
+                    return $this;
+                }
+
+                // This is a last resort but sometimes very slow Magento finder
+                // If magento is not in a generic webserver directory e.g. htdocs, public, www, it's better use the --mage parameter to specify it's location
+                // @todo, add timeout, or verbose output
+                {
+                    echo 'Note, Your not in a Magento directory, MagePatch try to find one based on default web server directory names, this can be slow. Specifying the --mage [path] parameter is better.'.PHP_EOL;
+                }
                 $finder = new Finder($path);
                 $finder->MageFinder($path); // @todo unstable poc faster finder
                 $finder->getMagePath();
@@ -91,6 +103,31 @@ class Mage
         }
 
         return $this;
+    }
+
+    /**
+     * Finds a Magento installation by webroots
+     *
+     * @param $path
+     * @return $this|bool
+     */
+    private function findMageOneDirectoryBelow($path)
+    {
+        $webroots = ['public', 'www', 'htdocs', 'public_html', 'webroot'];
+        $dirs = scandir($path, SCANDIR_SORT_NONE);
+        foreach ($webroots as $root) {
+            if (in_array($root, $dirs) && file_exists(
+                    $path.DIRECTORY_SEPARATOR.$root.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'Mage.php'
+                )) {
+                if ($this->initMage(
+                    $path.DIRECTORY_SEPARATOR.$root.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'Mage.php'
+                )) {
+                    return $this;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -180,6 +217,8 @@ class Mage
     /**
      * @param $edition
      *
+     * @todo re-evaluate whether this is necessary
+     *
      * @return bool|mixed|null|string
      */
     private function sanitizeEdition($edition)
@@ -264,7 +303,7 @@ class Mage
         }
 
         if (file_exists($patchFile) && is_readable($patchFile)) { // double check
-            $this->appliedPatches = []; // set ampty arr
+            $this->appliedPatches = []; // set empty arr
             try {
                 $fh = fopen($patchFile, 'rb+');
                 while (!feof($fh)) {
