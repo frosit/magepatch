@@ -62,7 +62,7 @@ matrix:
 before_install:
 #  - phpenv config-rm xdebug.ini
   - travis_retry composer self-update
-  - travis_retry composer global require hirak/prestissimo
+#  - travis_retry composer global require hirak/prestissimo
 
 install:
   - travis_retry composer install --prefer-source --no-interaction --ignore-platform-reqs
