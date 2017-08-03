@@ -185,7 +185,9 @@ class Mage
     }
 
     /**
-     * @todo not so compatible with 1.4
+     * Gets Edition
+     *
+     * Checks for enterprise directory if method getEdition does not exist, e.g. > 1.7
      *
      * @return mixed
      */
@@ -193,7 +195,15 @@ class Mage
     {
         if ($this->edition === null && $this->initialized) {
             try {
-                $this->setEdition(\Mage::getEdition());
+                if (in_array('getEdition', get_class_methods('Mage'))) {
+                    $this->setEdition(\Mage::getEdition());
+                } else {
+                    $enterprise = file_exists(
+                        $this->getRootDir(
+                        ).DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'code'.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'enterprise'
+                    );
+                    $this->setEdition($enterprise ? 'EE' : 'CE');
+                }
             } catch (MageException $e) {
                 echo $e->getMessage();
             }

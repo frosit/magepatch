@@ -128,6 +128,7 @@ class InfoCommandTest extends TestCase
             $this->assertContains('Magento Location', $output, 'The command returned no Magento location.');
             $this->assertContains('App Version', $output, 'The command returned no app version');
         }
+        $this->markTestSkipped('Directory\' not defined, unable to finish test.');
     }
 
     public function testAttributes()
