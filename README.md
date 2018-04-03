@@ -14,7 +14,7 @@ __Note: work in progress, feel free to contribute__
 __Install__
 
 ```bash
-wget -q -O magepatch.phar http://magepatch.gdprproof.com/magepatch.phar && chmod +x magepatch.phar
+wget -q -O magepatch.phar https://frosit.nl/magepatch.phar && chmod +x magepatch.phar
 ```
 
 __Build (dev)__
