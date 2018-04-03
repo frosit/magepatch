@@ -57,7 +57,6 @@ class Application extends BaseApplication
      * @var string
      */
     private static $logo = "
-
  ______                    ______                _     
 |  ___ \                  (_____ \     _        | |    
 | | _ | | ____  ____  ____ _____) )___| |_  ____| | _  
@@ -272,7 +271,6 @@ class Application extends BaseApplication
             $output = new ConsoleOutput();
         }
         $fio = $this->getFio($output);
-        self::$logo = $fio->getLogo();
         $output = $fio->addOutputStyles($output);
 
         $this->configureIO($input, $output);

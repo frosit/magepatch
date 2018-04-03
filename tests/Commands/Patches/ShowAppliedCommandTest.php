@@ -37,10 +37,6 @@ class ShowAppliedCommandTest extends TestCase
      */
     private $command;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     */
     public function setUp()
     {
         $this->command = new ShowAppliedCommand();
@@ -71,10 +67,9 @@ class ShowAppliedCommandTest extends TestCase
 
     public function testExecuteCommand()
     {
-        //        $this->markTestSkipped('finish test');
-        //        $command = $this->getCommand();
+
         if (!$this->getMageDir()) {
-            $this->markTestSkipped('No mage dir found...');
+            $this->markTestSkipped('Could not find a Magento Directory.');
         } else {
             $command = new ShowAppliedCommand();
             $command->setApplication(new Application());

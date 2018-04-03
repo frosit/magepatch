@@ -49,6 +49,7 @@ abstract class TestCase extends BaseTestCase
         $application->setVersion('1.0.0');
         $application->setName('Magento Patch Finder');
         $application->setFio(new FrositIoHelper());
+//        $application->getMage('')
 
         return $application;
     }

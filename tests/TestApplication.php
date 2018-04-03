@@ -31,14 +31,6 @@ use PHPUnit_Framework_MockObject_MockObject;
  */
 class TestApplication
 {
-    /**
-     * TestApplication constructor.
-     *
-     * @param \Composer\Autoload\ClassLoader $loader
-     */
-    public function __construct(ClassLoader $loader)
-    {
-    }
 
     /**
      * @var Application

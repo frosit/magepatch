@@ -70,7 +70,7 @@ class FindCommandTest extends TestCase
     public function testExecuteCommand()
     {
         if (!$this->getMageDir()) {
-            $this->markTestSkipped('No mage dir found...');
+            $this->markTestSkipped('Could not find a Magento Directory.');
         } else {
             $command = new FindCommand();
             $command->setApplication(new Application());

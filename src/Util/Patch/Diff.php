@@ -25,6 +25,9 @@ namespace Frosit\Util\Patch;
  */
 class Diff
 {
+
+    const SPLITLINE = "__PATCHFILE_FOLLOWS__\n";
+
     /**
      * @param $file
      * @param $mageDir
@@ -39,6 +42,8 @@ class Diff
 
         if (file_exists($file) && is_readable($file)) {
             if ($content = file_get_contents($file)) {
+
+                $diff = substr($content, strpos($content, self::SPLITLINE));
                 $content = explode("__PATCHFILE_FOLLOWS__\n", $content);
                 $content = end($content);
                 $diffFile = str_replace('.sh', '.diff', $file);
