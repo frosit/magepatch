@@ -6,6 +6,7 @@ branches:
     - master
     - staging
     - travis
+    - update
 
 cache:
   directories:

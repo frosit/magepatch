@@ -7,7 +7,6 @@ install:
 
 test:
 	build/local/test_setup.sh
-	@cscheck
 
 clean:
 	rm -Rf ./public
@@ -28,7 +27,7 @@ phpspec:
 update-index:
 	@echo "Be sure to double check the timestamp, this repo may be faster"
 	rm res/patches.json
-	wget http://magepatch.gdprproof.com/patches.json && mv patches.json res/
+	wget http://magepatch.fros.it/patches.json && mv patches.json res/
 	echo "Updated patch data"
 
 buildphar:

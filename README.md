@@ -14,14 +14,14 @@ __Note: work in progress, feel free to contribute__
 __Install__
 
 ```bash
-wget -q -O magepatch.phar https://frosit.nl/magepatch.phar && chmod +x magepatch.phar
+wget -q -O magepatch.phar https://magepatch.fros.it/magepatch.phar && chmod +x magepatch.phar
 ```
 
 __Build (dev)__
 
 ```bash
 git clone https://github.com/frosit/magepatch.git && \
-cd magento-patch-finder && make install && make build
+cd magepatch && make install && make build
 ```
 
 
